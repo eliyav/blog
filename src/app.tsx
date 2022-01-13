@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/navbar";
+import Header from "./components/header";
 import Home from "./components/home";
 import CreatePost from "./components/create-post";
-import ViewPosts from "./components/view-posts";
 import NotFound from "./components/notfound";
-import { NavbarItems } from "./components/navbar";
-import { Post } from "./components/post";
+import { HeaderItems } from "./components/header";
+import { PostProps } from "./components/post";
 
-const navbarItems: NavbarItems[] = [
+const navbarItems: HeaderItems[] = [
   {
     path: "/CreatePost",
     text: "New Post",
   },
-  { path: "/ViewPosts", text: "Blog History" },
 ];
 
 const App: React.VFC = () => {
-  const [posts, setPost] = useState<Post[]>([]);
+  const [posts, setPost] = useState<PostProps[]>([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -25,21 +23,20 @@ const App: React.VFC = () => {
         new URL("api/posts", "http://localhost:1234").href
       );
       const postData = await data.json();
-      setPost((posts) => [...posts, ...postData.posts]);
+      setPost((posts) => [...postData.posts]);
     };
     fetchPosts();
   }, []);
 
   return (
-    <div className="App">
-      <Navbar list={navbarItems} />
+    <>
+      <Header list={navbarItems} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home posts={posts} />} />
         <Route path="/CreatePost" element={<CreatePost savePost={setPost} />} />
-        <Route path="/ViewPosts" element={<ViewPosts posts={posts} />} />
         <Route element={<NotFound />} />
       </Routes>
-    </div>
+    </>
   );
 };
 

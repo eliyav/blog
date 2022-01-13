@@ -1,21 +1,22 @@
+:root {
+  --primary-gradient: linear-gradient(90deg, #1a5fb4 0%, #26a269 100%);
+  --secondary-color: #1a5fb4;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: sans-serif;
 }
 
 .page-title {
-  color: white;
-  width: 20%;
-  margin: 0.5em auto;
   padding: 0.5em;
-  animation: underline 2s forwards;
   text-align: center;
-  border-bottom: 0.1em solid white;
 }
 
-@keyframes underline {
-  100% {
-    width: 85%;
-  }
+.display-width {
+  max-width: 95ch;
+  margin: 0 auto;
+  padding: 0 1em;
 }

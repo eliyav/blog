@@ -1,6 +1,4 @@
 .create-post {
-  width: 60%;
-  margin: auto;
   padding-top: 1em;
   text-align: center;
 }
@@ -8,44 +6,42 @@
 .create-post form {
   display: flex;
   flex-flow: column wrap;
-  border: 0.1em solid black;
+  padding: 1em 1em;
 }
 
+.create-post form > * {
+  width: 100%;
+}
+
+form * + * {
+  margin-top: 1em;
+}
 .create-post label {
   text-align: left;
-  padding: 0.5em 1em;
   font-size: 1.5em;
-  color: white;
-  border-bottom: 0.1em solid dodgerblue;
-  margin-bottom: 1em;
 }
 
-.create-post input {
-  width: 90%;
-  margin: auto;
+.create-post :is(input, textarea) {
   padding: 1em;
+  border-radius: 7px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .create-post textarea {
-  width: 90%;
-  margin: auto;
-  padding: 1em;
   resize: vertical;
   min-height: 5em;
   max-height: 10em;
 }
 
 .create-post button {
-  margin: 1em auto;
-  width: fit-content;
-  padding: 0.5em;
-  border-radius: 0.75em;
+  padding: 1em 1em;
+  border-radius: 7px;
   font-size: 1.3em;
-  font-weight: bold;
-  border: 0.1em solid black;
+  border: 1px solid black;
+  background: var(--primary-gradient);
+  color: white;
 }
 
 .create-post button:hover {
-  background-color: dodgerblue;
-  color: whitesmoke;
+  filter: saturate(2.5);
 }

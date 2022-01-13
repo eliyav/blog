@@ -1,15 +1,15 @@
 import React, { useRef } from "react";
-import { Post } from "../components/post";
+import { PostProps } from "../components/post";
 import "../styles/create-post.css";
 
 interface CreatePostProps {
-  savePost: React.Dispatch<React.SetStateAction<Post[]>>;
+  savePost: React.Dispatch<React.SetStateAction<PostProps[]>>;
 }
 
 const CreatePost: React.VFC<CreatePostProps> = ({ savePost }) => {
   const formRef = useRef(null);
   return (
-    <div className="create-post">
+    <div className="create-post display-width">
       <h1 className="page-title">Create a Post</h1>
       <form
         ref={formRef}
