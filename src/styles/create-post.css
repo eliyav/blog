@@ -1,0 +1,51 @@
+.create-post {
+  width: 60%;
+  margin: auto;
+  padding-top: 1em;
+  text-align: center;
+}
+
+.create-post form {
+  display: flex;
+  flex-flow: column wrap;
+  border: 0.1em solid black;
+}
+
+.create-post label {
+  text-align: left;
+  padding: 0.5em 1em;
+  font-size: 1.5em;
+  color: white;
+  border-bottom: 0.1em solid dodgerblue;
+  margin-bottom: 1em;
+}
+
+.create-post input {
+  width: 90%;
+  margin: auto;
+  padding: 1em;
+}
+
+.create-post textarea {
+  width: 90%;
+  margin: auto;
+  padding: 1em;
+  resize: vertical;
+  min-height: 5em;
+  max-height: 10em;
+}
+
+.create-post button {
+  margin: 1em auto;
+  width: fit-content;
+  padding: 0.5em;
+  border-radius: 0.75em;
+  font-size: 1.3em;
+  font-weight: bold;
+  border: 0.1em solid black;
+}
+
+.create-post button:hover {
+  background-color: dodgerblue;
+  color: whitesmoke;
+}

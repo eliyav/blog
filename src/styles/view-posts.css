@@ -1,0 +1,29 @@
+.posts-container {
+  width: 60%;
+  margin: auto;
+  padding-top: 1em;
+}
+
+.post {
+  height: min-content;
+  padding: 2em 2em;
+  border: 0.1em dashed black;
+}
+
+.post-title {
+  padding-bottom: 0.1em;
+  border-bottom: 0.1em solid dodgerblue;
+  color: whitesmoke;
+  margin: auto;
+}
+
+.post-content {
+  padding: 1em 1em;
+}
+
+.post-date {
+  font-size: 0.75em;
+  font-style: italic;
+  color: whitesmoke;
+  text-decoration: underline;
+}

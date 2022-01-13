@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.page-title {
+  color: white;
+  width: 20%;
+  margin: 0.5em auto;
+  padding: 0.5em;
+  animation: underline 2s forwards;
+  text-align: center;
+  border-bottom: 0.1em solid white;
+}
+
+@keyframes underline {
+  100% {
+    width: 85%;
+  }
+}
