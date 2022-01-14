@@ -5,11 +5,11 @@ import Home from "./components/home";
 import CreatePost from "./components/create-post";
 import NotFound from "./components/notfound";
 import { HeaderItems } from "./components/header";
-import { PostProps } from "./components/post";
+import { Post, PostProps } from "./components/post";
 
 const navbarItems: HeaderItems[] = [
   {
-    path: "/CreatePost",
+    path: "/create-post",
     text: "New Post",
   },
 ];
@@ -33,7 +33,8 @@ const App: React.VFC = () => {
       <Header list={navbarItems} />
       <Routes>
         <Route path="/" element={<Home posts={posts} />} />
-        <Route path="/CreatePost" element={<CreatePost savePost={setPost} />} />
+        <Route path="/create-post" element={<CreatePost savePost={setPost} />} />
+        <Route path="/post" element={<Post content="test" title="test" date={{date:"time", time:"test"}}/>}/>
         <Route element={<NotFound />} />
       </Routes>
     </>

@@ -1,6 +1,11 @@
 :root {
   --primary-gradient: linear-gradient(90deg, #1a5fb4 0%, #26a269 100%);
   --secondary-color: #1a5fb4;
+  --secondary-alt-color: #26a269;
+}
+
+html {
+  background-color: rgb(30, 30, 30);
 }
 
 * {
@@ -13,6 +18,9 @@
 .page-title {
   padding: 0.5em;
   text-align: center;
+  font-size: 2em;
+  color: var(--secondary-color);
+  text-transform: uppercase;
 }
 
 .display-width {

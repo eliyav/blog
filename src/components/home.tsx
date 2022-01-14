@@ -1,6 +1,7 @@
 import React from "react";
 import { PostProps, Post } from "./post";
 import "../styles/posts.css";
+import { Link } from "react-router-dom";
 
 const Home: React.VFC<{ posts: PostProps[] }> = ({ posts }) => {
   const displayPosts = posts.map((post, idx) => (
@@ -16,7 +17,7 @@ const Home: React.VFC<{ posts: PostProps[] }> = ({ posts }) => {
       <section className="intro">
         <div className="posts-container">
           <h1 className="page-title">Latest Posts</h1>
-          {posts.length ? displayPosts : <div>No Posts to Display!</div>}
+          {displayPosts ? displayPosts : <div>No Posts to Display!</div>}
         </div>
       </section>
     </main>
