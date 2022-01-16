@@ -1,3 +1,7 @@
+.post {
+  border-bottom: 1px solid grey;
+  padding-bottom: 2em;
+}
 .posts-container {
   padding-top: 1em;
 }
@@ -6,46 +10,59 @@
   margin-top: 2.5em;
 }
 
-.post-title {
+.post-title span {
   color: whitesmoke;
-  font-size: 1.5em;
+  font-size: 1.6em;
+  font-family: serif;
 }
 
 .post-title a {
   text-decoration: none;
   color: whitesmoke;
-  font-size: 1.5em;
+  font-size: 1.8em;
+  font-family: serif;
 }
 
 .post-title-animation {
-  border-bottom: 1px solid var(--secondary-alt-color);
+  border-bottom: 2px solid var(--primary-alt-color);
   padding-bottom: 0.1em;
   margin-bottom: 0.5em;
-  width: 30%;
+  width: 10%;
 }
 
 .post-date {
-  font-size: 0.85em;
   font-style: italic;
   color: rgb(180, 180, 180);
+  padding: 0.5em 0;
+  font-size: 1.2em;
+}
+
+.post-description {
+  font-size: 1.2em;
+  padding: 0.5em 0;
+  color: rgb(175, 175, 175);
+}
+
+.post-description.highlight {
+  font-size: 1.3em;
+  color: whitesmoke;
 }
 
 .post-content {
   font-size: 1.3em;
-  color: white;
+  color: whitesmoke;
 }
 
 .post-title:hover {
   color: grey;
 }
 
-.post-title:hover + .post-title-animation {
-  animation: animate-title 1s forwards;
-  border-bottom: 2px solid var(--secondary-alt-color);
+.post-title > a:hover + .post-title-animation {
+  animation: animate-title 0.5s forwards;
 }
 
 @keyframes animate-title {
   100% {
-    width: 80%;
+    width: 30%;
   }
 }

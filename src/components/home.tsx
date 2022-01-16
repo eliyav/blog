@@ -1,16 +1,10 @@
 import React from "react";
-import { PostProps, Post } from "./post";
 import "../styles/posts.css";
-import { Link } from "react-router-dom";
+import { PostProps, Post } from "./post";
 
 const Home: React.VFC<{ posts: PostProps[] }> = ({ posts }) => {
   const displayPosts = posts.map((post, idx) => (
-    <Post
-      title={post.title}
-      content={post.content}
-      date={post.date}
-      key={idx}
-    />
+    <Post post={post} expanded={false} key={idx} />
   ));
   return (
     <main className="home display-width">

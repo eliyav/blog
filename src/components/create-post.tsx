@@ -20,11 +20,10 @@ const CreatePost: React.VFC<CreatePostProps> = ({ savePost }) => {
           savePost((prevState) => [
             {
               title: formData.get("title") as string,
+              description: formData.get("description") as string,
               content: formData.get("content") as string,
-              date: {
-                date: date.toDateString(),
-                time: date.toLocaleTimeString(),
-              },
+              created: date.toUTCString(),
+              id: date.toUTCString(),
             },
             ...prevState,
           ]);
@@ -32,6 +31,12 @@ const CreatePost: React.VFC<CreatePostProps> = ({ savePost }) => {
       >
         <label>Title:</label>
         <input name="title" placeholder="Enter Title" required />
+        <label>Description:</label>
+        <textarea
+          name="description"
+          placeholder="Short caption"
+          required
+        ></textarea>
         <label>Content:</label>
         <textarea
           name="content"

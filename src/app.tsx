@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams, useSearchParams } from "react-router-dom";
 import Header from "./components/header";
 import Home from "./components/home";
 import CreatePost from "./components/create-post";
 import NotFound from "./components/notfound";
 import { HeaderItems } from "./components/header";
-import { Post, PostProps } from "./components/post";
+import { PostProps } from "./components/post";
+import { ViewPost } from "./components/view-post";
 
 const navbarItems: HeaderItems[] = [
   {
@@ -23,19 +24,26 @@ const App: React.VFC = () => {
         new URL("api/posts", "http://localhost:1234").href
       );
       const postData = await data.json();
-      setPost((posts) => [...postData.posts]);
+      setPost(() => [...postData.posts]);
     };
     fetchPosts();
   }, []);
+
+  const queryPosts = (params) => {
+    return posts.find((post) => post.id === params.postId);
+  };
 
   return (
     <>
       <Header list={navbarItems} />
       <Routes>
         <Route path="/" element={<Home posts={posts} />} />
-        <Route path="/create-post" element={<CreatePost savePost={setPost} />} />
-        <Route path="/post" element={<Post content="test" title="test" date={{date:"time", time:"test"}}/>}/>
-        <Route element={<NotFound />} />
+        <Route
+          path="/posts/:postId"
+          element={<ViewPost queryPosts={queryPosts} />}
+        />
+        <Route path="create-post" element={<CreatePost savePost={setPost} />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

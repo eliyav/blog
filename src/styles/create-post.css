@@ -19,6 +19,8 @@ form * + * {
 .create-post label {
   text-align: left;
   font-size: 1.5em;
+  color: whitesmoke;
+  font-family: serif;
 }
 
 .create-post :is(input, textarea) {
