@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Routes, Route, useParams, useSearchParams } from "react-router-dom";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Header from "./components/header";
 import Home from "./components/home";
 import CreatePost from "./components/create-post";
@@ -18,6 +18,7 @@ const navbarItems: HeaderItems[] = [
 const App: React.VFC = () => {
   const [posts, setPosts] = useState<PostProps[]>([]);
   const [filteredPosts, setFilteredPosts] = useState<PostProps[]>([]);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -45,6 +46,23 @@ const App: React.VFC = () => {
     setFilteredPosts(() => [...filteredPosts]);
   };
 
+  const onFormSubmit = (e: FormEvent) => {
+    const date = new Date();
+    e.preventDefault();
+    const formData = new FormData(formRef.current);
+    setPosts((prevState) => [
+      {
+        title: formData.get("title") as string,
+        description: formData.get("description") as string,
+        content: formData.get("content") as string,
+        created: date.toUTCString(),
+        id: date.toUTCString(),
+      },
+      ...prevState,
+    ]);
+    formRef.current.reset();
+  };
+
   return (
     <>
       <Header list={navbarItems} queryPosts={queryPostsByName} />
@@ -59,7 +77,7 @@ const App: React.VFC = () => {
         />
         <Route
           path="create-post"
-          element={<CreatePost savePost={setPosts} />}
+          element={<CreatePost onFormSubmit={onFormSubmit} formRef={formRef} />}
         />
         <Route path="*" element={<NotFound />} />
       </Routes>

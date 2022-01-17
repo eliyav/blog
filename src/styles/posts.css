@@ -5,7 +5,7 @@
 .posts-container {
   padding-top: 1em;
 }
-
+ 
 .post + .post {
   margin-top: 2.5em;
 }
