@@ -21,12 +21,17 @@ const App: React.VFC = () => {
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
+    setFilteredPosts(() => [...posts]);
+  }, [posts]);
+
+  useEffect(() => {
     const fetchPosts = async () => {
       const data = await fetch(
         new URL("api/posts", "http://localhost:1234").href
       );
       const postData = await data.json();
       setPosts(() => [...postData.posts]);
+      setFilteredPosts(() => [...postData.posts]);
     };
     fetchPosts();
   }, []);
@@ -51,14 +56,14 @@ const App: React.VFC = () => {
     e.preventDefault();
     const formData = new FormData(formRef.current);
     setPosts((prevState) => [
+      ...prevState,
       {
         title: formData.get("title") as string,
         description: formData.get("description") as string,
         content: formData.get("content") as string,
         created: date.toUTCString(),
-        id: date.toUTCString(),
+        id: `Winx-${posts.length + 1}`,
       },
-      ...prevState,
     ]);
     formRef.current.reset();
   };
@@ -67,9 +72,10 @@ const App: React.VFC = () => {
     <>
       <Header list={navbarItems} queryPosts={queryPostsByName} />
       <Routes>
+        <Route path="/" element={<Home posts={filteredPosts} />} />
         <Route
-          path="/"
-          element={<Home posts={posts} filteredPosts={filteredPosts} />}
+          path="/page/:pageId"
+          element={<Home posts={filteredPosts}></Home>}
         />
         <Route
           path="/posts/:postId"

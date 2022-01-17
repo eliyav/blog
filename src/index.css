@@ -29,3 +29,19 @@ html {
   margin: 0 auto;
   padding: 0 1em;
 }
+
+.page-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em;
+  padding: 1em;
+  font-size: 1.22em;
+}
+.page-navigation a {
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+.page-navigation span {
+  color: white;
+}
