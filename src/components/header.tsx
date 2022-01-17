@@ -9,13 +9,20 @@ export interface HeaderItems {
 
 const Header: React.VFC<{
   list: HeaderItems[];
-}> = ({ list }) => {
+  queryPosts: (name: string) => void;
+}> = ({ list, queryPosts }) => {
   return (
     <header className="header">
       <div className="header-content display-width">
         <h2 className="header-title">
-          <Link to="/">Eliya's Blog</Link>
+          <Link to="/">My Blog</Link>
         </h2>
+        <input
+          className="header-search"
+          type="search"
+          placeholder="Search"
+          onChange={(e) => queryPosts(e.target.value)}
+        ></input>
         <nav className="header-nav">
           <ul>
             {list.map((item, idx) => (

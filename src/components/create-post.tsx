@@ -26,7 +26,7 @@ const CreatePost: React.VFC<CreatePostProps> = ({ savePost }) => {
               id: date.toUTCString(),
             },
             ...prevState,
-          ]);
+          ])
         }}
       >
         <label>Title:</label>

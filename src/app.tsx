@@ -16,7 +16,8 @@ const navbarItems: HeaderItems[] = [
 ];
 
 const App: React.VFC = () => {
-  const [posts, setPost] = useState<PostProps[]>([]);
+  const [posts, setPosts] = useState<PostProps[]>([]);
+  const [filteredPosts, setFilteredPosts] = useState<PostProps[]>([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -24,25 +25,42 @@ const App: React.VFC = () => {
         new URL("api/posts", "http://localhost:1234").href
       );
       const postData = await data.json();
-      setPost(() => [...postData.posts]);
+      setPosts(() => [...postData.posts]);
     };
     fetchPosts();
   }, []);
 
-  const queryPosts = (params) => {
+  const queryPostsById = (params) => {
     return posts.find((post) => post.id === params.postId);
+  };
+
+  const queryPostsByName = (name: string) => {
+    const filteredPosts = posts.reduce((previousValue, currentValue) => {
+      const checkIfTrue = currentValue.title
+        .toLocaleLowerCase()
+        .includes(name.toLocaleLowerCase());
+      if (checkIfTrue) previousValue.push(currentValue);
+      return previousValue;
+    }, []);
+    setFilteredPosts(() => [...filteredPosts]);
   };
 
   return (
     <>
-      <Header list={navbarItems} />
+      <Header list={navbarItems} queryPosts={queryPostsByName} />
       <Routes>
-        <Route path="/" element={<Home posts={posts} />} />
+        <Route
+          path="/"
+          element={<Home posts={posts} filteredPosts={filteredPosts} />}
+        />
         <Route
           path="/posts/:postId"
-          element={<ViewPost queryPosts={queryPosts} />}
+          element={<ViewPost queryPosts={queryPostsById} />}
         />
-        <Route path="create-post" element={<CreatePost savePost={setPost} />} />
+        <Route
+          path="create-post"
+          element={<CreatePost savePost={setPosts} />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
