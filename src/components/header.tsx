@@ -8,9 +8,9 @@ export interface HeaderItems {
 }
 
 const Header: React.VFC<{
-  list: HeaderItems[];
-  queryPosts: (name: string) => void;
-}> = ({ list, queryPosts }) => {
+  links: HeaderItems[];
+  onSearch: (name: string) => void;
+}> = ({ links, onSearch }) => {
   return (
     <header className="header">
       <div className="header-content display-width">
@@ -21,11 +21,11 @@ const Header: React.VFC<{
           className="header-search"
           type="search"
           placeholder="Search"
-          onChange={(e) => queryPosts(e.target.value)}
+          onChange={(e) => onSearch(e.target.value)}
         ></input>
         <nav className="header-nav">
           <ul>
-            {list.map((item, idx) => (
+            {links.map((item, idx) => (
               <Link to={item.path} key={idx}>
                 {item.text}
               </Link>

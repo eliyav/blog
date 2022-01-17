@@ -1,17 +1,34 @@
-import React, { FormEvent } from "react";
+import React from "react";
 import "../styles/create-post.css";
+import { PostProps } from "./post";
 
 interface CreatePostProps {
-  onFormSubmit: (e: FormEvent) => void;
-  formRef: React.MutableRefObject<HTMLFormElement>;
+  onFormSubmit: (post: PostProps) => void;
+  nextPostId: string;
 }
 
-// React.DOMAttributes<HTMLFormElement>.onSubmit?: React.FormEventHandler<HTMLFormElement>
-const CreatePost: React.VFC<CreatePostProps> = ({ onFormSubmit, formRef }) => {
+const CreatePost: React.VFC<CreatePostProps> = ({
+  onFormSubmit,
+  nextPostId,
+}) => {
   return (
     <div className="create-post display-width">
       <h1 className="page-title">Create a Post</h1>
-      <form ref={formRef} onSubmit={onFormSubmit}>
+      <form
+        onSubmit={(ev) => {
+          ev.preventDefault();
+          const date = new Date();
+          const formData = new FormData(ev.currentTarget);
+          onFormSubmit({
+            title: formData.get("title") as string,
+            description: formData.get("description") as string,
+            content: formData.get("content") as string,
+            created: date.toUTCString(),
+            id: nextPostId,
+          });
+          ev.currentTarget.reset();
+        }}
+      >
         <label>Title:</label>
         <input name="title" placeholder="Enter Title" required />
         <label>Description:</label>

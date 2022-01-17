@@ -1,5 +1,5 @@
-import React, { FormEvent, useEffect, useRef, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useEffect, useMemo, useState } from "react";
+import { Routes, Route, useMatch } from "react-router-dom";
 import Header from "./components/header";
 import Home from "./components/home";
 import CreatePost from "./components/create-post";
@@ -15,14 +15,29 @@ const navbarItems: HeaderItems[] = [
   },
 ];
 
-const App: React.VFC = () => {
-  const [posts, setPosts] = useState<PostProps[]>([]);
-  const [filteredPosts, setFilteredPosts] = useState<PostProps[]>([]);
-  const formRef = useRef<HTMLFormElement>(null);
+const findBy = (key: keyof PostProps, value: string) => (post) =>
+  post[key] === value;
 
-  useEffect(() => {
-    setFilteredPosts(() => [...posts]);
-  }, [posts]);
+const searchBy = (key: keyof PostProps, value: string) => (post) =>
+  post[key].toLocaleLowerCase().includes(value.toLocaleLowerCase());
+
+const App: React.VFC = () => {
+  const postMatch = useMatch("/posts/:postId");
+  const pageMatch = useMatch("/page/:pageId");
+  const [posts, setPosts] = useState<PostProps[]>([]);
+  const [search, setSearch] = useState<string>("");
+  const post = useMemo(
+    () => posts.find(findBy("id", postMatch?.params?.postId)),
+    [postMatch, posts]
+  );
+  const filteredPosts = useMemo(
+    () => posts.filter(searchBy("title", search)),
+    [search, posts]
+  );
+
+  const onFormSubmit = (post: PostProps) => {
+    setPosts([...posts, post]);
+  };
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -31,59 +46,28 @@ const App: React.VFC = () => {
       );
       const postData = await data.json();
       setPosts(() => [...postData.posts]);
-      setFilteredPosts(() => [...postData.posts]);
     };
     fetchPosts();
   }, []);
 
-  const queryPostsById = (params) => {
-    return posts.find((post) => post.id === params.postId);
-  };
-
-  const queryPostsByName = (name: string) => {
-    const filteredPosts = posts.reduce((previousValue, currentValue) => {
-      const checkIfTrue = currentValue.title
-        .toLocaleLowerCase()
-        .includes(name.toLocaleLowerCase());
-      if (checkIfTrue) previousValue.push(currentValue);
-      return previousValue;
-    }, []);
-    setFilteredPosts(() => [...filteredPosts]);
-  };
-
-  const onFormSubmit = (e: FormEvent) => {
-    const date = new Date();
-    e.preventDefault();
-    const formData = new FormData(formRef.current);
-    setPosts((prevState) => [
-      ...prevState,
-      {
-        title: formData.get("title") as string,
-        description: formData.get("description") as string,
-        content: formData.get("content") as string,
-        created: date.toUTCString(),
-        id: `Winx-${posts.length + 1}`,
-      },
-    ]);
-    formRef.current.reset();
-  };
-
   return (
     <>
-      <Header list={navbarItems} queryPosts={queryPostsByName} />
+      <Header links={navbarItems} onSearch={setSearch} />
       <Routes>
         <Route path="/" element={<Home posts={filteredPosts} />} />
         <Route
           path="/page/:pageId"
           element={<Home posts={filteredPosts}></Home>}
         />
-        <Route
-          path="/posts/:postId"
-          element={<ViewPost queryPosts={queryPostsById} />}
-        />
+        <Route path="/posts/:postId" element={<ViewPost post={post} />} />
         <Route
           path="create-post"
-          element={<CreatePost onFormSubmit={onFormSubmit} formRef={formRef} />}
+          element={
+            <CreatePost
+              onFormSubmit={onFormSubmit}
+              nextPostId={`winx-${posts.length + 1}`}
+            />
+          }
         />
         <Route path="*" element={<NotFound />} />
       </Routes>

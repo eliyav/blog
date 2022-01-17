@@ -1,13 +1,13 @@
 import React from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { calcPageRequirements } from "../helpers/calcHelpers";
+import { paginate } from "../helpers/calcHelpers";
 import "../styles/posts.css";
 import { PostProps, Post } from "./post";
 
 const Home: React.VFC<{ posts: PostProps[]; page?: number }> = ({ posts }) => {
   const params = useParams();
-  const [page, maxPage, startIdx, closeIdx] = calcPageRequirements(
+  const { page, maxPage, startIdx, closeIdx } = paginate(
     params.pageId,
     posts.length
   );
