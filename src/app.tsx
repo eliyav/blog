@@ -5,7 +5,7 @@ import Home from "./components/home";
 import CreatePost from "./components/create-post";
 import NotFound from "./components/notfound";
 import { HeaderItems } from "./components/header";
-import { PostProps } from "./components/post";
+import { PostProps } from "./components/view-post";
 import { ViewPost } from "./components/view-post";
 
 const navbarItems: HeaderItems[] = [
@@ -35,10 +35,6 @@ const App: React.VFC = () => {
     [search, posts]
   );
 
-  const onFormSubmit = (post: PostProps) => {
-    setPosts([...posts, post]);
-  };
-
   useEffect(() => {
     const fetchPosts = async () => {
       const data = await fetch(
@@ -64,7 +60,7 @@ const App: React.VFC = () => {
           path="create-post"
           element={
             <CreatePost
-              onFormSubmit={onFormSubmit}
+              onFormSubmit={(post) => setPosts([...posts, post])}
               nextPostId={`winx-${posts.length + 1}`}
             />
           }

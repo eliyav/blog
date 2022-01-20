@@ -1,18 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export interface PostProps {
+export const Post: React.VFC<{
   title: string;
   description: string;
   content: string;
   created: string;
   id: string;
-}
-
-export const Post: React.VFC<{ post: PostProps; expanded: boolean }> = ({
-  post: { title, description, content, created, id },
-  expanded,
-}) => {
+  expanded: boolean;
+}> = ({ title, description, content, created, id, expanded }) => {
   const highlight = expanded ? "" : "highlight";
   const date = new Intl.DateTimeFormat("en", {
     month: "long",

@@ -1,7 +1,7 @@
 :root {
-  --primary-gradient: linear-gradient(90deg, #1a5fb4 0%, #26a269 100%);
-  --primary-color: #1a5fb4;
-  --primary-alt-color: #26a269;
+  --primary-gradient: linear-gradient(90deg, #811ad4 0%, #d67187 100%);
+  --primary-color: #811ad4;
+  --primary-alt-color: #d67187;
 }
 
 html {
@@ -18,7 +18,7 @@ html {
 .page-title {
   padding: 0.5em;
   text-align: center;
-  font-size: 2.5em;
+  font-size: 2.75em;
   color: var(--primary-color);
   text-transform: uppercase;
   font-family: serif;

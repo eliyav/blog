@@ -1,9 +1,31 @@
 import React from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { paginate } from "../helpers/calcHelpers";
+import { paginate } from "../helpers/pagination";
 import "../styles/posts.css";
-import { PostProps, Post } from "./post";
+import { Post } from "./post";
+import { PostProps } from "./view-post";
+
+const paginatePosts =
+  (startIdx: number, closeIdx: number) =>
+  (previousValue, currentValue, idx) => {
+    if (idx <= startIdx && idx > closeIdx) {
+      const { title, description, content, created, id } = currentValue;
+      return [
+        ...previousValue,
+        <Post
+          title={title}
+          description={description}
+          content={content}
+          created={created}
+          id={id}
+          expanded={false}
+          key={idx}
+        />,
+      ];
+    }
+    return previousValue;
+  };
 
 const Home: React.VFC<{ posts: PostProps[]; page?: number }> = ({ posts }) => {
   const params = useParams();
@@ -12,11 +34,7 @@ const Home: React.VFC<{ posts: PostProps[]; page?: number }> = ({ posts }) => {
     posts.length
   );
 
-  let displayPosts = [];
-  for (let i = posts.length - 1; i >= 0; i--) {
-    if (i <= startIdx && i > closeIdx)
-      displayPosts.push(<Post post={posts[i]} expanded={false} key={i} />);
-  }
+  const displayPosts = posts.reduceRight(paginatePosts(startIdx, closeIdx), []);
 
   return (
     <main className="home display-width">

@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/create-post.css";
-import { PostProps } from "./post";
+import { PostProps } from "./view-post";
 
 interface CreatePostProps {
   onFormSubmit: (post: PostProps) => void;
