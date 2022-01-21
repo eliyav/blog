@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Routes, Route, useMatch } from "react-router-dom";
+import { Routes, Route, useMatch, useLocation } from "react-router-dom";
 import Header from "./components/header";
 import Home from "./components/home";
 import CreatePost from "./components/create-post";
@@ -7,6 +7,7 @@ import NotFound from "./components/notfound";
 import { HeaderItems } from "./components/header";
 import { PostProps } from "./components/view-post";
 import { ViewPost } from "./components/view-post";
+import { paginate } from "./helpers/pagination";
 
 const navbarItems: HeaderItems[] = [
   {
@@ -34,7 +35,21 @@ const App: React.VFC = () => {
     () => posts.filter(searchBy("title", search)),
     [search, posts]
   );
-
+  const pagination = useMemo(
+    () =>
+      paginate(
+        filteredPosts.length,
+        pageMatch ? parseInt(pageMatch.params.pageId) : null
+      ),
+    [filteredPosts, pageMatch]
+  );
+  const paginatedPosts = useMemo(
+    () =>
+      filteredPosts
+        .reverse()
+        .slice(pagination.startIndex, pagination.endIndex + 1),
+    [filteredPosts, pageMatch]
+  );
   useEffect(() => {
     const fetchPosts = async () => {
       const data = await fetch(
@@ -50,10 +65,25 @@ const App: React.VFC = () => {
     <>
       <Header links={navbarItems} onSearch={setSearch} />
       <Routes>
-        <Route path="/" element={<Home posts={filteredPosts} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              posts={paginatedPosts}
+              pages={pagination.pages}
+              currentPage={pagination.currentPage}
+            />
+          }
+        />
         <Route
           path="/page/:pageId"
-          element={<Home posts={filteredPosts}></Home>}
+          element={
+            <Home
+              posts={paginatedPosts}
+              pages={pagination.pages}
+              currentPage={pagination.currentPage}
+            ></Home>
+          }
         />
         <Route path="/posts/:postId" element={<ViewPost post={post} />} />
         <Route

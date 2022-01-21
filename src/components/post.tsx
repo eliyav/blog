@@ -7,8 +7,8 @@ export const Post: React.VFC<{
   content: string;
   created: string;
   id: string;
-  expanded: boolean;
-}> = ({ title, description, content, created, id, expanded }) => {
+  expanded?: boolean;
+}> = ({ title, description, content, created, id, expanded = false }) => {
   const highlight = expanded ? "" : "highlight";
   const date = new Intl.DateTimeFormat("en", {
     month: "long",
@@ -23,7 +23,9 @@ export const Post: React.VFC<{
         {expanded ? (
           <span>{title}</span>
         ) : (
-          <Link to={`/posts/${id}`}>{title}</Link>
+          <Link to={`/posts/${id}`} state={{ expanded: true }}>
+            {title}
+          </Link>
         )}
         <div className="post-title-animation"></div>
       </h1>

@@ -17,12 +17,6 @@ const Header: React.VFC<{
         <h2 className="header-title">
           <Link to="/">My Blog</Link>
         </h2>
-        <input
-          className="header-search"
-          type="search"
-          placeholder="Search"
-          onChange={(e) => onSearch(e.target.value)}
-        ></input>
         <nav className="header-nav">
           <ul>
             {links.map((item, idx) => (
@@ -32,6 +26,12 @@ const Header: React.VFC<{
             ))}
           </ul>
         </nav>
+        <input
+          className="header-search"
+          type="search"
+          placeholder="Search"
+          onChange={(e) => onSearch(e.target.value)}
+        ></input>
       </div>
     </header>
   );

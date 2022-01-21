@@ -15,15 +15,16 @@ export const ViewPost: React.VFC<{
 }> = ({ post: { title, description, content, created, id } }) =>
   title ? (
     <div className="display-width">
-      <h1 className="page-title">Blog Post</h1>
-      <Post
-        title={title}
-        description={description}
-        content={content}
-        created={created}
-        id={id}
-        expanded={true}
-      />
+      <div className="posts-container">
+        <Post
+          title={title}
+          description={description}
+          content={content}
+          created={created}
+          id={id}
+          expanded={true}
+        />
+      </div>
     </div>
   ) : (
     <NotFound />

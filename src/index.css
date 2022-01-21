@@ -19,7 +19,7 @@ html {
   padding: 0.5em;
   text-align: center;
   font-size: 2.75em;
-  color: var(--primary-color);
+  color: rgb(200, 200, 200);
   text-transform: uppercase;
   font-family: serif;
 }
@@ -32,16 +32,18 @@ html {
 
 .page-navigation {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin: 1em;
   padding: 1em;
   font-size: 1.22em;
 }
+
 .page-navigation a {
   text-decoration: none;
   color: whitesmoke;
+  padding: 0 1em;
 }
 
-.page-navigation span {
-  color: white;
+.page-navigation .currentPage {
+  color: red;
 }
