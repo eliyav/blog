@@ -1,14 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "../styles/posts.css";
 import { Post } from "./post";
 import { PostProps } from "./view-post";
 
 const Home: React.VFC<{
   posts: PostProps[];
-  pages: number[];
-  currentPage: number;
-}> = ({ posts, pages, currentPage }) => {
+  PageNavigation: () => JSX.Element;
+}> = ({ posts, PageNavigation }) => {
   return (
     <main className="home display-width">
       <section className="intro">
@@ -29,21 +27,7 @@ const Home: React.VFC<{
             <div>No Posts to Display!</div>
           )}
         </div>
-        <div className="page-navigation">
-          <Link to={`/page/${currentPage - 1}`} className="left-arrow">
-            {currentPage != 1 ? "←Previous" : null}
-          </Link>
-          {pages.map((page) => (
-            <Link to={`/page/${page}`}>
-              <span className={page === currentPage ? "currentPage" : null}>
-                {page}
-              </span>
-            </Link>
-          ))}
-          <Link to={`/page/${currentPage + 1}`} className="right-arrow">
-            {currentPage < pages.at(-1) ? "Next→" : null}
-          </Link>
-        </div>
+        <PageNavigation />
       </section>
     </main>
   );

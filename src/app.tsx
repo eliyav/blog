@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Routes, Route, useMatch, useLocation } from "react-router-dom";
+import { Routes, Route, useMatch } from "react-router-dom";
 import Header from "./components/header";
 import Home from "./components/home";
 import CreatePost from "./components/create-post";
@@ -7,7 +7,7 @@ import NotFound from "./components/notfound";
 import { HeaderItems } from "./components/header";
 import { PostProps } from "./components/view-post";
 import { ViewPost } from "./components/view-post";
-import { paginate } from "./helpers/pagination";
+import usePagination from "./components/hooks/usePagination";
 
 const navbarItems: HeaderItems[] = [
   {
@@ -25,7 +25,7 @@ const searchBy = (key: keyof PostProps, value: string) => (post) =>
 const App: React.VFC = () => {
   const postMatch = useMatch("/posts/:postId");
   const pageMatch = useMatch("/page/:pageId");
-  const [posts, setPosts] = useState<PostProps[]>([]);
+  const [posts, setPosts] = useState<readonly PostProps[]>([]);
   const [search, setSearch] = useState<string>("");
   const post = useMemo(
     () => posts.find(findBy("id", postMatch?.params?.postId)),
@@ -35,28 +35,23 @@ const App: React.VFC = () => {
     () => posts.filter(searchBy("title", search)),
     [search, posts]
   );
-  const pagination = useMemo(
-    () =>
-      paginate(
-        filteredPosts.length,
-        pageMatch ? parseInt(pageMatch.params.pageId) : null
-      ),
+  const { pagination, PageNavigation } = usePagination(
+    filteredPosts.length,
+    pageMatch ? pageMatch.params.pageId : null
+  );
+
+  const shownPosts = useMemo(
+    () => filteredPosts.slice(pagination.startIndex, pagination.endIndex + 1),
     [filteredPosts, pageMatch]
   );
-  const paginatedPosts = useMemo(
-    () =>
-      filteredPosts
-        .reverse()
-        .slice(pagination.startIndex, pagination.endIndex + 1),
-    [filteredPosts, pageMatch]
-  );
+
   useEffect(() => {
     const fetchPosts = async () => {
       const data = await fetch(
         new URL("api/posts", "http://localhost:1234").href
       );
-      const postData = await data.json();
-      setPosts(() => [...postData.posts]);
+      const postData = (await data.json()) as { posts: PostProps[] };
+      setPosts(new Array(100).fill(postData.posts).flat().reverse());
     };
     fetchPosts();
   }, []);
@@ -67,23 +62,11 @@ const App: React.VFC = () => {
       <Routes>
         <Route
           path="/"
-          element={
-            <Home
-              posts={paginatedPosts}
-              pages={pagination.pages}
-              currentPage={pagination.currentPage}
-            />
-          }
+          element={<Home posts={shownPosts} PageNavigation={PageNavigation} />}
         />
         <Route
           path="/page/:pageId"
-          element={
-            <Home
-              posts={paginatedPosts}
-              pages={pagination.pages}
-              currentPage={pagination.currentPage}
-            ></Home>
-          }
+          element={<Home posts={shownPosts} PageNavigation={PageNavigation} />}
         />
         <Route path="/posts/:postId" element={<ViewPost post={post} />} />
         <Route

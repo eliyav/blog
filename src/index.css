@@ -41,7 +41,7 @@ html {
 .page-navigation a {
   text-decoration: none;
   color: whitesmoke;
-  padding: 0 1em;
+  padding: 0 0.4em;
 }
 
 .page-navigation .currentPage {

@@ -37,7 +37,8 @@ export function paginate(
   const pages = Array.from(Array(endPage + 1 - startPage).keys()).map(
     (i) => startPage + i
   );
-
+  const lastPage = totalPages;
+  const firstPage = 1;
   return {
     totalItems,
     currentPage,
@@ -48,5 +49,7 @@ export function paginate(
     startIndex,
     endIndex,
     pages,
+    lastPage,
+    firstPage,
   };
 }
