@@ -8,6 +8,7 @@ import { HeaderItems } from "./components/header";
 import { PostProps } from "./components/view-post";
 import { ViewPost } from "./components/view-post";
 import usePagination from "./components/hooks/usePagination";
+import postsJSON from "../posts.json";
 
 const navbarItems: HeaderItems[] = [
   {
@@ -39,21 +40,23 @@ const App: React.VFC = () => {
     filteredPosts.length,
     pageMatch ? pageMatch.params.pageId : null
   );
-
   const shownPosts = useMemo(
     () => filteredPosts.slice(pagination.startIndex, pagination.endIndex + 1),
     [filteredPosts, pageMatch]
   );
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const data = await fetch(
-        new URL("api/posts", "http://localhost:1234").href
-      );
-      const postData = (await data.json()) as { posts: PostProps[] };
-      setPosts(new Array(100).fill(postData.posts).flat().reverse());
-    };
-    fetchPosts();
+    //JSON import for serverless
+    setPosts(new Array(100).fill(postsJSON.posts).flat().reverse());
+
+    // const fetchPosts = async () => {
+    //   const data = await fetch(
+    //     new URL("api/posts", "http://localhost:1234").href
+    //   );
+    //   const postData = (await data.json()) as { posts: PostProps[] };
+    //   setPosts(new Array(100).fill(postData.posts).flat().reverse());
+    // };
+    // fetchPosts();
   }, []);
 
   return (

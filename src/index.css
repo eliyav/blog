@@ -32,9 +32,9 @@ html {
 
 .page-navigation {
   display: flex;
+  flex-flow: row wrap;
   justify-content: center;
   margin: 1em;
-  padding: 1em;
   font-size: 1.22em;
 }
 
@@ -46,4 +46,19 @@ html {
 
 .page-navigation .currentPage {
   color: red;
+}
+
+.navigation {
+  text-align: center;
+}
+
+.scroll-top {
+  margin: 1.5em;
+  color: white;
+  font-size: 1.1em;
+}
+
+.scroll-top > span:hover {
+  color: red;
+  cursor: pointer;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import NotFound from "./notfound";
 import { Post } from "./post";
+import { ScrollToTop } from "./scroll-to-top";
 
 export interface PostProps {
   title: string;
@@ -24,6 +25,9 @@ export const ViewPost: React.VFC<{
           id={id}
           expanded={true}
         />
+      </div>
+      <div className="navigation">
+        <ScrollToTop />
       </div>
     </div>
   ) : (
