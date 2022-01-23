@@ -17,10 +17,10 @@ const navbarItems: HeaderItems[] = [
   },
 ];
 
-const findBy = (key: keyof PostProps, value: string) => (post) =>
+const findBy = (key: keyof PostProps, value: string) => (post: PostProps) =>
   post[key] === value;
 
-const searchBy = (key: keyof PostProps, value: string) => (post) =>
+const searchBy = (key: keyof PostProps, value: string) => (post: PostProps) =>
   post[key].toLocaleLowerCase().includes(value.toLocaleLowerCase());
 
 const App: React.VFC = () => {
@@ -29,7 +29,7 @@ const App: React.VFC = () => {
   const [posts, setPosts] = useState<readonly PostProps[]>([]);
   const [search, setSearch] = useState<string>("");
   const post = useMemo(
-    () => posts.find(findBy("id", postMatch?.params?.postId)),
+    () => posts.find(findBy("id", postMatch?.params?.postId!)),
     [postMatch, posts]
   );
   const filteredPosts = useMemo(
@@ -38,7 +38,7 @@ const App: React.VFC = () => {
   );
   const { pagination, PageNavigation } = usePagination(
     filteredPosts.length,
-    pageMatch ? pageMatch.params.pageId : null
+    pageMatch ? pageMatch?.params?.pageId! : null
   );
   const shownPosts = useMemo(
     () => filteredPosts.slice(pagination.startIndex, pagination.endIndex + 1),
@@ -71,7 +71,7 @@ const App: React.VFC = () => {
           path="/page/:pageId"
           element={<Home posts={shownPosts} PageNavigation={PageNavigation} />}
         />
-        <Route path="/posts/:postId" element={<ViewPost post={post} />} />
+        <Route path="/posts/:postId" element={<ViewPost post={post!} />} />
         <Route
           path="create-post"
           element={

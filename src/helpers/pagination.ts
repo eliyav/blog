@@ -1,6 +1,6 @@
 export function paginate(
   totalItems: number,
-  currentPage = 1,
+  currentPage: number | undefined = 1,
   pageSize = 10,
   maxPages = 10
 ) {

@@ -12,7 +12,7 @@ export interface PostProps {
 }
 
 export const ViewPost: React.VFC<{
-  post?: PostProps;
+  post: PostProps;
 }> = ({ post: { title, description, content, created, id } }) =>
   title ? (
     <div className="display-width">
