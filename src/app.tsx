@@ -76,7 +76,7 @@ const App: React.VFC = () => {
           path="create-post"
           element={
             <CreatePost
-              onFormSubmit={(post) => setPosts([...posts, post])}
+              onFormSubmit={(post) => setPosts([post, ...posts])}
               nextPostId={`winx-${posts.length + 1}`}
             />
           }

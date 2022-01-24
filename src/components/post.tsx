@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { getDates } from "../helpers/dates";
 
 export const Post: React.VFC<{
   title: string;
@@ -10,20 +11,18 @@ export const Post: React.VFC<{
   expanded?: boolean;
 }> = ({ title, description, content, created, id, expanded = false }) => {
   const highlight = expanded ? "" : "highlight";
-  const date = new Intl.DateTimeFormat("en", {
-    month: "long",
-    day: "2-digit",
-    year: "numeric",
-  }).format(new Date(created));
+  const { dateString, daysPassed } = getDates(created);
 
   return (
     <div className="post">
-      <p className="post-date">{date}</p>
+      <p className="post-date">
+        {dateString} <span className="post-date-history">{daysPassed}</span>
+      </p>
       <h1 className="post-title">
         {expanded ? (
           <span>{title}</span>
         ) : (
-          <Link to={`/posts/${id}`} state={{ expanded: true }}>
+          <Link to={`/posts/${id}`} onClick={() => window.scrollTo(0, 0)}>
             {title}
           </Link>
         )}

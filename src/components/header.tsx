@@ -20,7 +20,11 @@ const Header: React.VFC<{
         <nav className="header-nav">
           <ul>
             {links.map((item, idx) => (
-              <Link to={item.path} key={idx}>
+              <Link
+                to={item.path}
+                onClick={() => window.scrollTo(0, 0)}
+                key={idx}
+              >
                 {item.text}
               </Link>
             ))}

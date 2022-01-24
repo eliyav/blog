@@ -27,7 +27,6 @@ html {
 .display-width {
   max-width: 95ch;
   margin: 0 auto;
-  padding: 0 1em;
 }
 
 .page-navigation {
@@ -61,4 +60,12 @@ html {
 .scroll-top > span:hover {
   color: red;
   cursor: pointer;
+}
+
+.not-found {
+  text-align: center;
+  margin: 5em auto;
+  padding: 0em 1em;
+  color: whitesmoke;
+  font-size: 1.5em;
 }
