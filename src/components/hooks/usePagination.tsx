@@ -12,7 +12,10 @@ export default (totalItems: number, pageId: string | null) => {
   const PageNavigation = () => (
     <div className="navigation">
       <ScrollToTop />
-      <div className="page-navigation">
+      <div
+        className="page-navigation"
+        onClick={() => window.scrollTo(0, document.body.scrollHeight)}
+      >
         <Link to={`/page/${pagination.firstPage}`}>{"←←First"}</Link>
         <Link to={`/page/${pagination.currentPage - 1}`}>
           {pagination.currentPage != 1 ? "←Previous" : null}
@@ -22,7 +25,10 @@ export default (totalItems: number, pageId: string | null) => {
         </Link>
         <Link to={`/page/${pagination.lastPage}`}>{"Last→→"}</Link>
       </div>
-      <div className="page-navigation">
+      <div
+        className="page-navigation"
+        onClick={() => window.scrollTo(0, document.body.scrollHeight)}
+      >
         {pagination.pages.map((page, idx) => (
           <Link to={`/page/${page}`} key={idx}>
             <span
