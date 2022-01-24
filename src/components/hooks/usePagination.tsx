@@ -17,6 +17,12 @@ export default (totalItems: number, pageId: string | null) => {
         <Link to={`/page/${pagination.currentPage - 1}`}>
           {pagination.currentPage != 1 ? "←Previous" : null}
         </Link>
+        <Link to={`/page/${pagination.currentPage + 1}`}>
+          {pagination.currentPage < pagination.pages.at(-1)! ? "Next→" : ""}
+        </Link>
+        <Link to={`/page/${pagination.lastPage}`}>{"Last→→"}</Link>
+      </div>
+      <div className="page-navigation">
         {pagination.pages.map((page, idx) => (
           <Link to={`/page/${page}`} key={idx}>
             <span
@@ -26,10 +32,6 @@ export default (totalItems: number, pageId: string | null) => {
             </span>
           </Link>
         ))}
-        <Link to={`/page/${pagination.currentPage + 1}`}>
-          {pagination.currentPage < pagination.pages.at(-1)! ? "Next→" : ""}
-        </Link>
-        <Link to={`/page/${pagination.lastPage}`}>{"Last→→"}</Link>
       </div>
     </div>
   );
