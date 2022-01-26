@@ -1,5 +1,5 @@
 import React from "react";
-import NotFound from "./notfound";
+import NotFound from "./not-found";
 import { Post } from "./post";
 import { ScrollToTop } from "./scroll-to-top";
 

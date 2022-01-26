@@ -3,11 +3,11 @@ import { Routes, Route, useMatch } from "react-router-dom";
 import Header from "./components/header";
 import Home from "./components/home";
 import CreatePost from "./components/create-post";
-import NotFound from "./components/notfound";
+import NotFound from "./components/not-found";
 import { HeaderItems } from "./components/header";
 import { PostProps } from "./components/view-post";
 import { ViewPost } from "./components/view-post";
-import usePagination from "./components/hooks/usePagination";
+import { usePagination } from "./hooks/use-pagination";
 import postsJSON from "../posts.json";
 
 const navbarItems: HeaderItems[] = [
@@ -16,7 +16,6 @@ const navbarItems: HeaderItems[] = [
     text: "New Post",
   },
 ];
-
 const findBy = (key: keyof PostProps, value: string) => (post: PostProps) =>
   post[key] === value;
 
@@ -36,7 +35,7 @@ const App: React.VFC = () => {
     () => posts.filter(searchBy("title", search)),
     [search, posts]
   );
-  const { pagination, PageNavigation } = usePagination(
+  const { pagination, pageNavigation } = usePagination(
     filteredPosts.length,
     pageMatch ? pageMatch?.params?.pageId! : null
   );
@@ -46,17 +45,7 @@ const App: React.VFC = () => {
   );
 
   useEffect(() => {
-    //JSON import for serverless
     setPosts(new Array(100).fill(postsJSON.posts).flat().reverse());
-
-    // const fetchPosts = async () => {
-    //   const data = await fetch(
-    //     new URL("api/posts", "http://localhost:1234").href
-    //   );
-    //   const postData = (await data.json()) as { posts: PostProps[] };
-    //   setPosts(new Array(100).fill(postData.posts).flat().reverse());
-    // };
-    // fetchPosts();
   }, []);
 
   return (
@@ -65,11 +54,11 @@ const App: React.VFC = () => {
       <Routes>
         <Route
           path="/"
-          element={<Home posts={shownPosts} PageNavigation={PageNavigation} />}
+          element={<Home posts={shownPosts} navigation={pageNavigation} />}
         />
         <Route
           path="/page/:pageId"
-          element={<Home posts={shownPosts} PageNavigation={PageNavigation} />}
+          element={<Home posts={shownPosts} navigation={pageNavigation} />}
         />
         <Route path="/posts/:postId" element={<ViewPost post={post!} />} />
         <Route
