@@ -1,6 +1,7 @@
 import React from "react";
-import "../styles/create-post.css";
 import { PostProps } from "./view-post";
+import { Editor } from "./editor";
+import "../styles/create-post.css";
 
 interface CreatePostProps {
   onFormSubmit: (post: PostProps) => void;
@@ -14,6 +15,7 @@ const CreatePost: React.VFC<CreatePostProps> = ({
   return (
     <div className="create-post display-width">
       <h1 className="page-title">Create a Post</h1>
+      <Editor />
       <form
         onSubmit={(ev) => {
           ev.preventDefault();
