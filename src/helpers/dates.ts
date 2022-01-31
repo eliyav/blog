@@ -12,9 +12,9 @@ export const getDates = (createdDate: string) => {
     const d2 = new Date(createdDate);
     const timep = d.getTime() - d2.getTime();
     const days = Math.floor(timep / 8.64e7);
-    if (days === 0) return "- posted today";
-    else if (days === 1) return `- posted ${days} day ago`;
-    else return `- posted ${days} days ago`;
+    if (days === 0) return "posted today";
+    else if (days === 1) return `${days} day ago`;
+    else return `${days} days ago`;
   }
 
   return { dateString, daysPassed };

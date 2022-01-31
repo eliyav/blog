@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { getDates } from "../helpers/dates";
+import calendarIcon from "../../public/calendar-icon.png";
+import clockIcon from "../../public/clock-icon.png";
 
 export const Post: React.VFC<{
   title: string;
@@ -16,7 +18,10 @@ export const Post: React.VFC<{
   return (
     <div className="post">
       <p className="post-date">
-        {dateString} <span className="post-date-history">{daysPassed}</span>
+        <img className="post-calendar-icon" src={calendarIcon}></img>
+        <span>{dateString}</span>
+        <img className="post-clock-icon" src={clockIcon}></img>
+        <span className="post-date-history">{daysPassed}</span>
       </p>
       <h1 className="post-title">
         {expanded ? (

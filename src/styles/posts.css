@@ -1,6 +1,8 @@
 .post {
   border-bottom: 1px solid grey;
   padding-bottom: 2em;
+  padding-left: 0.75em;
+  padding-right: 0.5em;
 }
 .posts-container {
   padding-top: 1em;
@@ -35,12 +37,22 @@
   color: rgb(180, 180, 180);
   padding: 0.5em 0;
   font-size: 1.2em;
+  display: flex;
+  align-items: center;
 }
 
 .post-date-history {
-  padding-left: 0.5em;
-  font-size: 0.95em;
+  font-size: 0.75em;
   color: rgb(225, 225, 225);
+}
+
+.post-calendar-icon {
+  height: 40px;
+}
+
+.post-clock-icon {
+  padding-left: 0.25em;
+  height: 25px;
 }
 
 .post-description {
