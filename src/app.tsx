@@ -50,7 +50,7 @@ const App: React.VFC = () => {
 
   return (
     <>
-      <Header links={navbarItems} onSearch={setSearch} />
+      <Header links={navbarItems} onSearch={setSearch} searchedValue={search} />
       <Routes>
         <Route
           path="/"

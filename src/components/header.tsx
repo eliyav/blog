@@ -12,13 +12,13 @@ export interface HeaderItems {
 const Header: React.VFC<{
   links: HeaderItems[];
   onSearch: (name: string) => void;
-}> = ({ links, onSearch }) => {
+  searchedValue: string;
+}> = ({ links, onSearch, searchedValue }) => {
   const buttonRef = useRef<HTMLImageElement>(null);
   const [showMenu, setShowMenu] = useState(false);
 
-  console.log(showMenu);
   const menuDisplay = showMenu ? (
-    <Menu links={links} onSearch={onSearch} />
+    <Menu links={links} onSearch={onSearch} searchedValue={searchedValue} showMenu={setShowMenu} />
   ) : null;
 
   return (
@@ -27,7 +27,7 @@ const Header: React.VFC<{
         <h2 className="header-title">
           <Link to="/">My Blog</Link>
         </h2>
-        <button
+        <div
           className="menu-button"
           onClick={(e) => {
             if (e.target == buttonRef.current)
@@ -36,7 +36,7 @@ const Header: React.VFC<{
         >
           <img ref={buttonRef} className="menu-img" src={menuIcon}></img>
           {menuDisplay}
-        </button>
+        </div>
       </div>
     </header>
   );

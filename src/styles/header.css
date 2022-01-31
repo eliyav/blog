@@ -46,8 +46,7 @@
 }
 
 .header-search::placeholder {
-  color: white;
-  padding-left: 1em;
+  color: black;
 }
 
 .header-search:focus {
@@ -77,5 +76,5 @@
 .menu {
   position: absolute;
   right: 0;
-  background-color: rgb(202, 202, 202);
+  background: linear-gradient(0deg, rgb(88, 88, 88), rgb(170, 170, 170));
 }
