@@ -8,7 +8,7 @@ import { HeaderItems } from "./components/header";
 import { PostProps } from "./components/view-post";
 import { ViewPost } from "./components/view-post";
 import { usePagination } from "./hooks/use-pagination";
-import postsJSON from "../posts.json";
+import postsJSON from "./posts.json";
 
 const navbarItems: HeaderItems[] = [
   {

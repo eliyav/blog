@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { HashRouter, BrowserRouter } from "react-router-dom";
-import "./index.css";
+import { HashRouter } from "react-router-dom";
+import "/projects/blog/src/index.css";
 import App from "./app";
 
 ReactDOM.render(

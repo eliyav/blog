@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/header.css";
-import menuIcon from "../../public/menu-icon.png";
+import menuIcon from "../icons/menu-icon.png";
 import { Menu } from "./menu";
 
 export interface HeaderItems {
@@ -18,7 +18,12 @@ const Header: React.VFC<{
   const [showMenu, setShowMenu] = useState(false);
 
   const menuDisplay = showMenu ? (
-    <Menu links={links} onSearch={onSearch} searchedValue={searchedValue} showMenu={setShowMenu} />
+    <Menu
+      links={links}
+      onSearch={onSearch}
+      searchedValue={searchedValue}
+      showMenu={setShowMenu}
+    />
   ) : null;
 
   return (

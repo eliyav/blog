@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { getDates } from "../helpers/dates";
-import calendarIcon from "../../public/calendar-icon.png";
-import clockIcon from "../../public/clock-icon.png";
+import calendarIcon from "../icons/calendar-icon.png";
+import clockIcon from "../icons/clock-icon.png";
 
 export const Post: React.VFC<{
   title: string;
