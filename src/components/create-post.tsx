@@ -15,7 +15,6 @@ const CreatePost: React.VFC<CreatePostProps> = ({
   return (
     <div className="create-post display-width">
       <h1 className="page-title">Create a Post</h1>
-      <Editor />
       <form
         onSubmit={(ev) => {
           ev.preventDefault();

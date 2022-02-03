@@ -34,7 +34,7 @@ html {
   flex-flow: row wrap;
   justify-content: center;
   margin: 1em 0.4em;
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 
 .page-navigation a {
@@ -54,7 +54,7 @@ html {
 .scroll-top {
   margin: 1.5em;
   color: white;
-  font-size: 1.6em;
+  font-size: 1.4em;
 }
 
 .scroll-top > span:hover {

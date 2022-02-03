@@ -14,14 +14,19 @@ export const Navigation: React.VFC<{ navigation: Navigation }> = ({
   <div className="navigation">
     <ScrollToTop />
     <div className="page-navigation" onClick={() => window.scrollTo(0, 0)}>
-      <Link to={`/page/${firstPage}`}>←←First</Link>
+      <Link to={`/page/${firstPage}`}>
+        {currentPage != 1 ? "←←First" : null}
+      </Link>
       <Link to={`/page/${currentPage - 1}`}>
         {currentPage != 1 ? "←Previous" : null}
       </Link>
       <Link to={`/page/${currentPage + 1}`}>
-        {currentPage < pages.at(-1)! ? "Next→" : ""}
+        {currentPage < pages[pages.length - 1] ? "Next→" : null}
       </Link>
-      <Link to={`/page/${lastPage}`}>Last→→</Link>
+      <Link to={`/page/${lastPage}`}>
+        {" "}
+        {currentPage < pages[pages.length - 1]! ? "Last→→" : null}
+      </Link>
     </div>
     <div className="page-navigation" onClick={() => window.scrollTo(0, 0)}>
       {pages.map((page, idx) => (

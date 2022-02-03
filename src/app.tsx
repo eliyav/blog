@@ -60,7 +60,10 @@ const App: React.VFC = () => {
           path="/page/:pageId"
           element={<Home posts={shownPosts} navigation={pageNavigation} />}
         />
-        <Route path="/posts/:postId" element={<ViewPost post={post!} />} />
+        <Route
+          path="/posts/:postId"
+          element={post ? <ViewPost post={post} /> : <NotFound />}
+        />
         <Route
           path="create-post"
           element={
