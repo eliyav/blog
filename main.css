@@ -37,7 +37,7 @@ html {
   flex-flow: row wrap;
   justify-content: center;
   margin: 1em 0.4em;
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 
 .page-navigation a {
@@ -57,7 +57,7 @@ html {
 .scroll-top {
   margin: 1.5em;
   color: white;
-  font-size: 1.6em;
+  font-size: 1.4em;
 }
 
 .scroll-top > span:hover {
@@ -269,13 +269,6 @@ html {
   100% {
     width: 30%;
   }
-}
-
-/*!*************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/styles/editor.css ***!
-  \*************************************************************************/
-.codex-editor {
-  background-color: rgba(245, 245, 245, 0.904);
 }
 
 /*!******************************************************************************!*\
