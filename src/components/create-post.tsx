@@ -1,8 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { PostProps } from "./view-post";
 import { Editor } from "./editor";
 import "../styles/create-post.css";
-//@ts-ignore
 import EditorJS from "@editorjs/editorjs";
 
 interface CreatePostProps {
@@ -38,6 +37,7 @@ const CreatePost: React.VFC<CreatePostProps> = ({
       >
         <label>Title:</label>
         <input name="title" placeholder="Enter Title" required />
+        <label>Content:</label>
         <Editor editorRef={editorRef} />
         <button>Save Post</button>
       </form>

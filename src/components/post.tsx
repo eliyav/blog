@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { getDates } from "../helpers/dates";
 import calendarIcon from "../icons/calendar-icon.png";
-import clockIcon from "../icons/clock-icon.png";
-//@ts-ignore
 import Output from "editorjs-react-renderer";
 import { OutputData } from "@editorjs/editorjs";
 
