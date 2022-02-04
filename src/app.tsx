@@ -44,9 +44,9 @@ const App: React.VFC = () => {
     [filteredPosts, pageMatch]
   );
 
-  useEffect(() => {
-    setPosts(new Array(100).fill(postsJSON.posts).flat().reverse());
-  }, []);
+  // useEffect(() => {
+  //   setPosts(new Array(100).fill(postsJSON.posts).flat().reverse());
+  // }, []);
 
   return (
     <>

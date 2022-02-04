@@ -3,17 +3,18 @@ import { Link } from "react-router-dom";
 import { getDates } from "../helpers/dates";
 import calendarIcon from "../icons/calendar-icon.png";
 import clockIcon from "../icons/clock-icon.png";
+//@ts-ignore
+import Output from "editorjs-react-renderer";
+import { OutputData } from "@editorjs/editorjs";
 
 export const Post: React.VFC<{
-  title: string;
-  description: string;
-  content: string;
-  created: string;
   id: string;
+  title: string;
+  content: string;
   expanded?: boolean;
-}> = ({ title, description, content, created, id, expanded = false }) => {
-  const highlight = expanded ? "" : "highlight";
-  const { dateString, daysPassed } = getDates(created);
+}> = ({ id, title, content, expanded = false }) => {
+  const data: OutputData = JSON.parse(content);
+  const { dateString, daysPassed } = getDates(data.time!);
 
   return (
     <div className="post">
@@ -33,8 +34,12 @@ export const Post: React.VFC<{
         )}
         <div className="post-title-animation"></div>
       </h1>
-      <div className={"post-description" + ` ${highlight}`}>{description}</div>
-      {expanded ? <p className="post-content">{content}</p> : null}
+      {expanded ? (
+        <div className="post-content">
+          <Output data={data} />
+        </div>
+      ) : null}
+      {!expanded ? <div className="post-divider"></div> : null}
     </div>
   );
 };

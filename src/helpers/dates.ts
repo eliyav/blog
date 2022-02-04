@@ -1,4 +1,4 @@
-export const getDates = (createdDate: string) => {
+export const getDates = (createdDate: number) => {
   const dateString = new Intl.DateTimeFormat("en", {
     month: "long",
     day: "2-digit",

@@ -16,11 +16,9 @@ const Home: React.VFC<{
           {posts ? (
             posts.map((post, idx) => (
               <Post
-                title={post.title}
-                description={post.description}
-                content={post.content}
-                created={post.created}
                 id={post.id}
+                title={post.title}
+                content={post.content}
                 key={idx}
               />
             ))

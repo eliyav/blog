@@ -1,8 +1,13 @@
 .post {
-  border-bottom: 1px solid grey;
-  padding-bottom: 2em;
   padding-left: 0.75em;
   padding-right: 0.5em;
+}
+
+.post-divider {
+  width: 60%;
+  border-bottom: 1px solid grey;
+  padding-top: 2em;
+  margin: auto;
 }
 .posts-container {
   padding-top: 1em;

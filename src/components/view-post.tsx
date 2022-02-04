@@ -4,27 +4,18 @@ import { Post } from "./post";
 import { ScrollToTop } from "./scroll-to-top";
 
 export interface PostProps {
-  title: string;
-  description: string;
-  content: string;
-  created: string;
   id: string;
+  title: string;
+  content: string;
 }
 
 export const ViewPost: React.VFC<{
   post: PostProps;
-}> = ({ post: { title, description, content, created, id } }) =>
+}> = ({ post: { id, title, content } }) =>
   title ? (
     <div className="display-width">
       <div className="posts-container">
-        <Post
-          title={title}
-          description={description}
-          content={content}
-          created={created}
-          id={id}
-          expanded={true}
-        />
+        <Post id={id} title={title} content={content} expanded={true} />
       </div>
       <div className="navigation">
         <ScrollToTop />

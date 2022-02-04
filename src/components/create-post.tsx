@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { PostProps } from "./view-post";
 import { Editor } from "./editor";
 import "../styles/create-post.css";
+//@ts-ignore
+import EditorJS from "@editorjs/editorjs";
 
 interface CreatePostProps {
   onFormSubmit: (post: PostProps) => void;
@@ -12,38 +14,31 @@ const CreatePost: React.VFC<CreatePostProps> = ({
   onFormSubmit,
   nextPostId,
 }) => {
+  const editorRef = useRef<EditorJS>();
+  const formRef = useRef<HTMLFormElement>(null);
+
   return (
     <div className="create-post display-width">
       <h1 className="page-title">Create a Post</h1>
       <form
-        onSubmit={(ev) => {
+        ref={formRef}
+        onSubmit={async (ev) => {
           ev.preventDefault();
-          const date = new Date();
           const formData = new FormData(ev.currentTarget);
+          const data = await editorRef.current!.save();
           onFormSubmit({
-            title: formData.get("title") as string,
-            description: formData.get("description") as string,
-            content: formData.get("content") as string,
-            created: date.toUTCString(),
             id: nextPostId,
+            title: formData.get("title") as string,
+            content: JSON.stringify(data),
           });
-          ev.currentTarget.reset();
+          console.log(ev);
+          formRef.current!.reset();
+          editorRef.current?.clear();
         }}
       >
         <label>Title:</label>
         <input name="title" placeholder="Enter Title" required />
-        <label>Description:</label>
-        <textarea
-          name="description"
-          placeholder="Short caption"
-          required
-        ></textarea>
-        <label>Content:</label>
-        <textarea
-          name="content"
-          placeholder="Write a Story"
-          required
-        ></textarea>
+        <Editor editorRef={editorRef} />
         <button>Save Post</button>
       </form>
     </div>

@@ -1,3 +1,7 @@
 .codex-editor {
   background-color: rgba(245, 245, 245, 0.904);
 }
+
+.editor-content {
+  color: whitesmoke;
+}
