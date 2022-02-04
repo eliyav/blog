@@ -1,7 +1,7 @@
 //@ts-nocheck
 import "../styles/editor.css";
 import React, { useEffect, useRef } from "react";
-import EditorJS, { OutputData, ToolConstructable } from "@editorjs/editorjs";
+import EditorJS, { ToolConstructable } from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import Image from "@editorjs/image";
 import Quote from "@editorjs/quote";

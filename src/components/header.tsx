@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/header.css";
-import menuIcon from "../icons/menu-icon.png";
+import menuIcon from "../icons/menu.png";
 import { Menu } from "./menu";
 
 export interface HeaderItems {

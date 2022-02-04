@@ -44,18 +44,24 @@
   background-color: transparent;
   border: 1px solid whitesmoke;
   border-radius: 5px;
+  color: whitesmoke;
+  border-radius: 7px;
 }
 
 .header-search::placeholder {
-  color: black;
+  color: whitesmoke;
 }
 
 .header-search:focus {
-  background-color: rgba(245, 245, 245, 0.26);
+  background-color: rgba(240, 240, 240, 0.26);
 }
 
 .header-search:focus::placeholder {
-  color: black;
+  color: whitesmoke;
+}
+
+.header-search::selection {
+  color: darkgray;
 }
 
 .menu-button {
@@ -67,8 +73,8 @@
 }
 
 .menu-img {
-  object-fit: contain;
-  width: 2.5em;
+  object-fit: cover;
+  width: 3.5em;
 }
 
 .menu-button:hover > .menu-img {
@@ -78,5 +84,6 @@
 .menu {
   position: absolute;
   right: 0;
-  background: linear-gradient(0deg, rgb(88, 88, 88), rgb(170, 170, 170));
+  background: linear-gradient(10deg, black, rgb(80, 80, 80));
+  border-radius: 7px;
 }

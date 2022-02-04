@@ -21,7 +21,6 @@ export const Post: React.VFC<{
       <p className="post-date">
         <img className="post-calendar-icon" src={calendarIcon}></img>
         <span>{dateString}</span>
-        <img className="post-clock-icon" src={clockIcon}></img>
         <span className="post-date-history">{daysPassed}</span>
       </p>
       <h1 className="post-title">
