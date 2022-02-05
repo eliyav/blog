@@ -88,3 +88,24 @@
   background: linear-gradient(10deg, black, rgb(80, 80, 80));
   border-radius: 7px;
 }
+
+.searched {
+  position: absolute;
+  background: transparent;
+  width: 100%;
+  text-align: center;
+}
+
+.searched-value {
+  padding: 0.5em;
+  background-color: rgb(80, 80, 80, 0.8);
+  color: whitesmoke;
+  border-radius: 7px;
+}
+
+.searched-close {
+  padding: 0.5em;
+  background-color: rgba(255, 0, 0, 0.5);
+  color: whitesmoke;
+  border-radius: 7px;
+}

@@ -1,3 +1,4 @@
+import { OutputData } from "@editorjs/editorjs";
 import React from "react";
 import NotFound from "./not-found";
 import { Post } from "./post";
@@ -6,7 +7,7 @@ import { ScrollToTop } from "./scroll-to-top";
 export interface PostProps {
   id: string;
   title: string;
-  content: string;
+  content: OutputData;
 }
 
 export const ViewPost: React.VFC<{
@@ -24,3 +25,8 @@ export const ViewPost: React.VFC<{
   ) : (
     <NotFound />
   );
+
+export interface LookupProps {
+  id: string;
+  title: string;
+}

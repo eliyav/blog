@@ -28,9 +28,8 @@ const CreatePost: React.VFC<CreatePostProps> = ({
           onFormSubmit({
             id: nextPostId,
             title: formData.get("title") as string,
-            content: JSON.stringify(data),
+            content: data,
           });
-          console.log(ev);
           formRef.current!.reset();
           editorRef.current?.clear();
         }}

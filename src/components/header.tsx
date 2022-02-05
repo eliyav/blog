@@ -17,15 +17,6 @@ const Header: React.VFC<{
   const buttonRef = useRef<HTMLImageElement>(null);
   const [showMenu, setShowMenu] = useState(false);
 
-  const menuDisplay = showMenu ? (
-    <Menu
-      links={links}
-      onSearch={onSearch}
-      searchedValue={searchedValue}
-      showMenu={setShowMenu}
-    />
-  ) : null;
-
   return (
     <header className="header">
       <div className="header-content display-width">
@@ -40,9 +31,24 @@ const Header: React.VFC<{
           }}
         >
           <img ref={buttonRef} className="menu-img" src={menuIcon}></img>
-          {menuDisplay}
+          {showMenu ? (
+            <Menu
+              links={links}
+              onSearch={onSearch}
+              searchedValue={searchedValue}
+              showMenu={setShowMenu}
+            />
+          ) : null}
         </div>
       </div>
+      {searchedValue && !showMenu ? (
+        <div className="searched">
+          <span className="searched-value">"{searchedValue}"</span>
+          <span className="searched-close" onClick={() => onSearch("")}>
+            X
+          </span>
+        </div>
+      ) : null}
     </header>
   );
 };

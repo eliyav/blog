@@ -5,7 +5,7 @@ import Home from "./components/home";
 import CreatePost from "./components/create-post";
 import NotFound from "./components/not-found";
 import { HeaderItems } from "./components/header";
-import { PostProps } from "./components/view-post";
+import { LookupProps, PostProps } from "./components/view-post";
 import { ViewPost } from "./components/view-post";
 import { usePagination } from "./hooks/use-pagination";
 import postsJSON from "./posts.json";
@@ -16,11 +16,12 @@ const navbarItems: HeaderItems[] = [
     text: "New Post",
   },
 ];
-const findBy = (key: keyof PostProps, value: string) => (post: PostProps) =>
+const findBy = (key: keyof LookupProps, value: string) => (post: LookupProps) =>
   post[key] === value;
 
-const searchBy = (key: keyof PostProps, value: string) => (post: PostProps) =>
-  post[key].toLocaleLowerCase().includes(value.toLocaleLowerCase());
+const searchBy =
+  (key: keyof LookupProps, value: string) => (post: LookupProps) =>
+    post[key].toLocaleLowerCase().includes(value.toLocaleLowerCase());
 
 const App: React.VFC = () => {
   const postMatch = useMatch("/posts/:postId");
@@ -44,9 +45,9 @@ const App: React.VFC = () => {
     [filteredPosts, pageMatch]
   );
 
-  // useEffect(() => {
-  //   setPosts(new Array(100).fill(postsJSON.posts).flat().reverse());
-  // }, []);
+  useEffect(() => {
+    setPosts(new Array(40).fill(postsJSON.posts).flat().reverse());
+  }, []);
 
   return (
     <>

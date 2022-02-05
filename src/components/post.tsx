@@ -1,18 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { getDates } from "../helpers/dates";
-import calendarIcon from "../icons/calendar-icon.png";
+import calendarIcon from "../icons/calendar.png";
 import Output from "editorjs-react-renderer";
 import { OutputData } from "@editorjs/editorjs";
 
 export const Post: React.VFC<{
   id: string;
   title: string;
-  content: string;
+  content: OutputData;
   expanded?: boolean;
 }> = ({ id, title, content, expanded = false }) => {
-  const data: OutputData = JSON.parse(content);
-  const { dateString, daysPassed } = getDates(data.time!);
+  const { dateString, daysPassed } = getDates(content.time!);
 
   return (
     <div className="post">
@@ -33,7 +32,7 @@ export const Post: React.VFC<{
       </h1>
       {expanded ? (
         <div className="post-content">
-          <Output data={data} />
+          <Output data={content} />
         </div>
       ) : null}
       {!expanded ? <div className="post-divider"></div> : null}
