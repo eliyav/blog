@@ -25,8 +25,3 @@ export const ViewPost: React.VFC<{
   ) : (
     <NotFound />
   );
-
-export interface LookupProps {
-  id: string;
-  title: string;
-}

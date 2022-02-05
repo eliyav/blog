@@ -5,7 +5,7 @@ import Home from "./components/home";
 import CreatePost from "./components/create-post";
 import NotFound from "./components/not-found";
 import { HeaderItems } from "./components/header";
-import { LookupProps, PostProps } from "./components/view-post";
+import { PostProps } from "./components/view-post";
 import { ViewPost } from "./components/view-post";
 import { usePagination } from "./hooks/use-pagination";
 import postsJSON from "./posts.json";
@@ -16,11 +16,11 @@ const navbarItems: HeaderItems[] = [
     text: "New Post",
   },
 ];
-const findBy = (key: keyof LookupProps, value: string) => (post: LookupProps) =>
+const findBy = (key: keyof PostProps, value: string) => (post: PostProps) =>
   post[key] === value;
 
 const searchBy =
-  (key: keyof LookupProps, value: string) => (post: LookupProps) =>
+  (key: keyof Omit<PostProps, "content">, value: string) => (post: PostProps) =>
     post[key].toLocaleLowerCase().includes(value.toLocaleLowerCase());
 
 const App: React.VFC = () => {
