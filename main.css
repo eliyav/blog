@@ -175,7 +175,7 @@ html {
 
 .menu-img {
   object-fit: cover;
-  width: 3.5em;
+  width: 2.5em;
 }
 
 .menu-button:hover > .menu-img {
